@@ -7,9 +7,9 @@ class Controller {
   Future<List<Article>> fetchData() async {
     final response =
         await dio.get('https://www.breakingbadapi.com/api/characters');
-    final app = response.data as List;
+    final resp = response.data as List;
     List<Article> article = [];
-    app.forEach((element) {
+    resp.forEach((element) {
       Article art = Article.fromJson(element);
       article.add(art);
     });
