@@ -9,12 +9,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List <Article>ag = [];
+  List<Article> comningData = [];
   bool isLoading = true;
 
   void aggg() async {
     Controller cont = Controller();
-    ag = await cont.fetchData();
+    comningData = await cont.fetchData();
     setState(() {
       isLoading = false;
     });
@@ -31,12 +31,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(),
       body: ListView.builder(
-        itemCount: ag.length,
+        itemCount: comningData.length,
         itemBuilder: (context, index) {
-          return
-            Column(children: [ Image.network(ag[index].image),
-              Text(ag[index].name),
-            ],);
+          return Column(
+            children: [
+              Image.network(comningData[index].image),
+              Text(comningData[index].name),
+            ],
+          );
         },
       ),
     );
