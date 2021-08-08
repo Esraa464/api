@@ -5,6 +5,7 @@ class Article {
   String nickname;
   String portrayed;
   String status;
+
   Article(
       {this.name,
       this.image,

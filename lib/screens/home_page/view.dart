@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/data.dart';
-import 'package:untitled/home_page/controller.dart';
-import 'package:untitled/home_page/details/view.dart';
-import 'package:untitled/home_page/model.dart';
+import 'package:untitled/widgets/data.dart';
+import 'package:untitled/screens/home_page/controller.dart';
+import 'package:untitled/screens/home_page/model.dart';
 
 class HomePage extends StatefulWidget {
   @override
