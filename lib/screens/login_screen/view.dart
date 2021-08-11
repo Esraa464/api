@@ -1,93 +1,12 @@
-// import 'package:flutter/material.dart';
-// import 'package:untitled/const/strings.dart';
-//
-// import 'package:untitled/widgets/bold_text.dart';
-// import 'package:untitled/widgets/default_text_form_field.dart';
-// import 'package:untitled/widgets/main_button.dart';
-//
-// class LoginWithEmail extends StatefulWidget {
-//   @override
-//   _LoginWithEmailState createState() => _LoginWithEmailState();
-// }
-//
-// class _LoginWithEmailState extends State<LoginWithEmail> {
-//   var formKey = GlobalKey<FormState>();
-//
-//   var emailController = TextEditingController();
-//   var passwordController = TextEditingController();
-//   bool isLoading = false;
-//
-//   bool isPassword = true;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//         title: Text(txt_sign_in),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(20),
-//         child: Form(
-//           key: formKey,
-//           child: ListView(
-//             children: [
-//               boldText(contact_with_email),
-//               DefaultTextFormField(
-//                   controller: emailController,
-//                   hintTxt: email,
-//                   type: TextInputType.emailAddress,
-//                   validator: (value) {
-//                     if (value.isEmpty) return 'Email must not be empty';
-//                     else if(!value.contains('@')) return 'missing @!';
-//                     else return null;
-//
-//                   }),
-//               DefaultTextFormField(
-//                 controller: passwordController,
-//                   isPassword: true,
-//                   hintTxt: password,
-//                   type: TextInputType.visiblePassword,
-//                   validator: (value) {
-//                     if (value.isEmpty) return 'Password must not be empty';
-//                      else if(value.length < 4) return 'Length';
-//                     else return null;
-//
-//                   }),
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(vertical: 19),
-//                 child: isLoading
-//                     ? Center(
-//                         child: CircularProgressIndicator(),
-//                       )
-//                     : mainButton(
-//                         text: txt_sign_in,
-//                         press: ()async {
-//                           if (formKey.currentState.validate()) {
-//                             print(emailController.text);
-//                             print(passwordController.text);
-//                             setState(() {
-//                              isLoading = true;
-//                             });
-//                           }
-//                         }),
-//               )
-//
-//
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:untitled/screens/home_page/view.dart';
 import 'package:untitled/screens/login_screen/controller.dart';
+
 class LoginView extends StatefulWidget {
   @override
   _LoginViewState createState() => _LoginViewState();
 }
+
 class _LoginViewState extends State<LoginView> {
   LoginController _loginController = LoginController();
   final formKey = GlobalKey<FormState>();
@@ -146,10 +65,7 @@ class _LoginViewState extends State<LoginView> {
                         _isLoading = true;
                       });
                       final message = await _loginController.login(
-                          emailController.text,
-                          passwordController.text
-
-                      );
+                          emailController.text, passwordController.text);
                       if (message != 'ok')
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(message)));
