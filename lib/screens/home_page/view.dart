@@ -1,8 +1,12 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/screens/login_screen/controller.dart';
+import 'package:untitled/screens/login_screen/view.dart';
 import 'package:untitled/widgets/data.dart';
 import 'package:untitled/screens/home_page/controller.dart';
 import 'package:untitled/screens/home_page/model.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,25 +16,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Article> comingData = [];
   bool isLoading = true;
+  final controller = LoginController();
 
-  void data() async {
+  void getData() async {
     Controller cont = Controller();
     comingData = await cont.fetchData();
     setState(() {
       isLoading = false;
     });
   }
-
   @override
   void initState() {
     super.initState();
-    data();
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          InkWell(child: Icon(Icons.logout,),
+          onTap: () async {
+            controller.logout();
+            Navigator.pushReplacement(context,MaterialPageRoute(builder: (ctx)=>LoginView()));
+          },
+          )
+        ],
+      ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(

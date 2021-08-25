@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/screens/home_page/view.dart';
 import 'package:untitled/screens/login_screen/controller.dart';
+import 'package:untitled/screens/register/view.dart';
+
 
 class LoginView extends StatefulWidget {
   @override
@@ -66,20 +68,25 @@ class _LoginViewState extends State<LoginView> {
                       });
                       final message = await _loginController.login(
                           emailController.text, passwordController.text);
-                      if (message != 'ok')
+                      if (message != 'ok') {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(message)));
-                      else
+                      } else {
+
+                        print(emailController.text*9);
+                        print(passwordController.text*29);
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => HomePage(),
                             ));
-                      setState(() {
-                        _isLoading = false;
-                      });
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
                     },
                     child: Text('Login')),
+            TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (ctx)=>RegisterScreen())), child:Text('Register'))
           ],
         ),
       ),
