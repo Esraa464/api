@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/screens/login_screen/view.dart';
 import 'package:untitled/screens/register/register_controller.dart';
+
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
-  SignUpController signUpController=SignUpController();
+  SignUpController signUpController = SignUpController();
   final formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
@@ -56,34 +56,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             _isLoading
                 ? Center(
-              child: CircularProgressIndicator(),
-            )
+                    child: CircularProgressIndicator(),
+                  )
                 : ElevatedButton(
-                onPressed: () async {
-                  if (!formKey.currentState.validate()) return;
-                  setState(() {
-                    _isLoading = true;
-                  });
-                  final message = await  SignUpController().signUp(
-                      emailController.text, passwordController.text);
-                  if (message != 'ok') {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text(message)));
-                  } else {
-
-                    print(emailController.text*9);
-                    print(passwordController.text*29);
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginView(),
-                        ));
-                    setState(() {
-                      _isLoading = false;
-                    });
-                  }
-                },
-                child: Text('Register')),
+                    onPressed: () async {
+                      if (!formKey.currentState.validate()) return;
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      final message = await SignUpController().signUp(
+                          emailController.text, passwordController.text);
+                      if (message != 'ok') {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text(message)));
+                      } else {
+                        print(emailController.text * 9);
+                        print(passwordController.text * 29);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginView(),
+                            ));
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    },
+                    child: Text('Register')),
           ],
         ),
       ),

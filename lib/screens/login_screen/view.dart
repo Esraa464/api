@@ -3,7 +3,6 @@ import 'package:untitled/screens/home_page/view.dart';
 import 'package:untitled/screens/login_screen/controller.dart';
 import 'package:untitled/screens/register/view.dart';
 
-
 class LoginView extends StatefulWidget {
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -72,9 +71,8 @@ class _LoginViewState extends State<LoginView> {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(message)));
                       } else {
-
-                        print(emailController.text*9);
-                        print(passwordController.text*29);
+                        print(emailController.text * 9);
+                        print(passwordController.text * 29);
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -86,7 +84,10 @@ class _LoginViewState extends State<LoginView> {
                       }
                     },
                     child: Text('Login')),
-            TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (ctx)=>RegisterScreen())), child:Text('Register'))
+            TextButton(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => RegisterScreen())),
+                child: Text('Register'))
           ],
         ),
       ),

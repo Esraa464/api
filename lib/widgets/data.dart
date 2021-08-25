@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
- class Data extends StatelessWidget {
+class Data extends StatelessWidget {
   String name;
   String birthDAy;
   String nickname;
