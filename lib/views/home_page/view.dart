@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/views/home_page/cubits/controller.dart';
 import 'package:untitled/views/home_page/models/model.dart';
 import 'package:untitled/views/login_screen/controller.dart';
