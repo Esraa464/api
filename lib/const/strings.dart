@@ -1,4 +1,3 @@
-
 const String txt_sign_in = "تسجيل الدخول";
 const contact_with_email='تواصل مع البريد الإلكترونى';
 const email='البريد الإلكتروني';

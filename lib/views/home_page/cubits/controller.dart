@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:untitled/screens/home_page/model.dart';
+import 'package:untitled/views/home_page/models/model.dart';
 
 class Controller {
   Dio dio = Dio();
 
+
   Future<List<Article>> fetchData() async {
     final response =
-        await dio.get('https://www.breakingbadapi.com/api/characters');
+    await dio.get('https://www.breakingbadapi.com/api/characters');
     final resp = response.data as List;
     List<Article> article = [];
     resp.forEach((element) {
@@ -15,4 +16,5 @@ class Controller {
     });
     return article;
   }
+
 }

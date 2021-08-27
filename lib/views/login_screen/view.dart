@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/screens/login_screen/view.dart';
-import 'package:untitled/screens/register/register_controller.dart';
+import 'package:untitled/views/home_page/view.dart';
+import 'package:untitled/views/login_screen/controller.dart';
+import 'package:untitled/views/register/view.dart';
 
-class RegisterScreen extends StatefulWidget {
+class LoginView extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  SignUpController signUpController = SignUpController();
+class _LoginViewState extends State<LoginView> {
+  LoginController _loginController = LoginController();
   final formKey = GlobalKey<FormState>();
-
   bool _isLoading = false;
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -25,10 +24,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: ListView(
           padding: EdgeInsets.all(20),
           children: [
+            Icon(Icons.phone, size: 100),
+            SizedBox(
+              height: 30,
+            ),
             TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              controller: emailController,
-              decoration: InputDecoration(hintText: 'Email'),
               validator: (value) {
                 if (value.isEmpty)
                   return 'Empty field!';
@@ -37,9 +37,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 else
                   return null;
               },
+              controller: emailController,
+              decoration: InputDecoration(hintText: 'Email'),
             ),
             TextFormField(
-              keyboardType: TextInputType.visiblePassword,
               validator: (value) {
                 if (value.isEmpty)
                   return 'Empty field!';
@@ -64,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       setState(() {
                         _isLoading = true;
                       });
-                      final message = await SignUpController().signUp(
+                      final message = await _loginController.login(
                           emailController.text, passwordController.text);
                       if (message != 'ok') {
                         ScaffoldMessenger.of(context)
@@ -75,14 +76,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginView(),
+                              builder: (context) => HomePage(),
                             ));
                         setState(() {
                           _isLoading = false;
                         });
                       }
                     },
-                    child: Text('Register')),
+                    child: Text('Login')),
+            TextButton(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => RegisterScreen())),
+                child: Text('Register'))
           ],
         ),
       ),

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/screens/home_page/view.dart';
-import 'package:untitled/screens/login_screen/controller.dart';
-import 'package:untitled/screens/register/view.dart';
+import 'package:untitled/views/login_screen/view.dart';
+import 'package:untitled/views/register/register_controller.dart';
 
-class LoginView extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginViewState createState() => _LoginViewState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  LoginController _loginController = LoginController();
+class _RegisterScreenState extends State<RegisterScreen> {
+  SignUpController signUpController = SignUpController();
   final formKey = GlobalKey<FormState>();
+
   bool _isLoading = false;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -24,11 +25,10 @@ class _LoginViewState extends State<LoginView> {
         child: ListView(
           padding: EdgeInsets.all(20),
           children: [
-            Icon(Icons.phone, size: 100),
-            SizedBox(
-              height: 30,
-            ),
             TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              controller: emailController,
+              decoration: InputDecoration(hintText: 'Email'),
               validator: (value) {
                 if (value.isEmpty)
                   return 'Empty field!';
@@ -37,10 +37,9 @@ class _LoginViewState extends State<LoginView> {
                 else
                   return null;
               },
-              controller: emailController,
-              decoration: InputDecoration(hintText: 'Email'),
             ),
             TextFormField(
+              keyboardType: TextInputType.visiblePassword,
               validator: (value) {
                 if (value.isEmpty)
                   return 'Empty field!';
@@ -65,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
                       setState(() {
                         _isLoading = true;
                       });
-                      final message = await _loginController.login(
+                      final message = await SignUpController().signUp(
                           emailController.text, passwordController.text);
                       if (message != 'ok') {
                         ScaffoldMessenger.of(context)
@@ -76,18 +75,14 @@ class _LoginViewState extends State<LoginView> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomePage(),
+                              builder: (context) => LoginView(),
                             ));
                         setState(() {
                           _isLoading = false;
                         });
                       }
                     },
-                    child: Text('Login')),
-            TextButton(
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => RegisterScreen())),
-                child: Text('Register'))
+                    child: Text('Register')),
           ],
         ),
       ),
