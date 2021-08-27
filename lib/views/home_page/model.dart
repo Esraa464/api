@@ -8,11 +8,11 @@ class Article {
 
   Article(
       {this.name,
-      this.image,
-      this.birthDAy,
-      this.nickname,
-      this.portrayed,
-      this.status});
+        this.image,
+        this.birthDAy,
+        this.nickname,
+        this.portrayed,
+        this.status});
 
   Article.fromJson(Map<String, dynamic> jsonData) {
     this.name = jsonData['name'];
